@@ -1,0 +1,24 @@
+{
+    "config": {
+        "sort-packages": true
+    },
+    "name": "aksenov/f",
+    "description": "framework",
+    "autoload": {
+        "psr-4": {
+            "Framework\\": "src/Framework/",
+            "Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=8.0",
+        "roave/security-advisories": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "scripts": {
+        "serve": "php -S 0.0.0.0:8080 -t public public/index.php",
+        "test": "phpunit --colors=always"
+    }
+}

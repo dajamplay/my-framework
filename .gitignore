@@ -1,0 +1,6 @@
+/vendor
+/.idea
+/phpunit.xml
+/public/build
+/node_modules
+/.phpunit.result.cache
