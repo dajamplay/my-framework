@@ -1,23 +1,24 @@
 <?php
 
-use Framework\Http\RequestFactory;
-use Framework\Http\Response;
+use Framework\Http\ResponseSender;
+use Laminas\Diactoros\ServerRequestFactory;
+use Laminas\Diactoros\Response;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 ### Initialization
 
-$request = RequestFactory::fromGlobals();
+$request = ServerRequestFactory::fromGlobals();
 
 ### Action
 
-$response = (new Response())
-    ->withHeader('X-developer', 'DaJaM');
+$response = new Response();
 
-### Sending
+$response->getBody()->write("<b>some content</b>\n");
 
-header('HTTP/1.1 ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase());
-foreach ($response->getHeaders() as $name => $value) {
-    header($name . ':' . $value);
-}
-echo $response->getBody();
+$response = $response
+    ->withAddedHeader('X-Show-Something', 'something');
+
+$emitter = new ResponseSender();
+$emitter->send($response);
+

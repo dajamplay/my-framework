@@ -12,7 +12,10 @@
     },
     "require": {
         "php": ">=8.0",
-        "roave/security-advisories": "dev-master"
+        "laminas/laminas-diactoros": "^2.9.2",
+        "psr/http-message": "^1.0",
+        "roave/security-advisories": "dev-master",
+        "vlucas/phpdotenv": "^5.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"

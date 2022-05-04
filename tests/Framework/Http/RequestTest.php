@@ -2,14 +2,14 @@
 
 namespace Tests\Framework\Http;
 
-use Framework\Http\Request;
 use PHPUnit\Framework\TestCase;
+use Laminas\Diactoros\ServerRequest;
 
 class RequestTest extends TestCase
 {
     public function testEmpty(): void
     {
-        $request = new Request();
+        $request = new ServerRequest();
 
         self::assertEquals([], $request->getQueryParams());
         self::assertNull($request->getParsedBody());
@@ -17,10 +17,11 @@ class RequestTest extends TestCase
 
     public function testQueryParams(): void
     {
-        $request = new Request($data = [
-            'name' => 'max',
-            'age' => 35
-        ]);
+        $request = (new ServerRequest())
+            ->withQueryParams($data = [
+                'name' => 'John',
+                'age' => 28,
+            ]);
 
         self::assertEquals($data, $request->getQueryParams());
         self::assertNull($request->getParsedBody());
@@ -28,7 +29,8 @@ class RequestTest extends TestCase
 
     public function testParsedBody(): void
     {
-        $request = new Request([], $data = ['title' => 'Title 1']);
+        $request = (new ServerRequest())
+            ->withParsedBody($data = ['title' => 'Title']);
 
         self::assertEquals([], $request->getQueryParams());
         self::assertEquals($data, $request->getParsedBody());
