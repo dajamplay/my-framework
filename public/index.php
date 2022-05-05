@@ -17,7 +17,7 @@ $response = new Response();
 $response->getBody()->write("<b>some content</b>\n");
 
 $response = $response
-    ->withAddedHeader('X-Show-Something', 'something');
+    ->withAddedHeader('X-Project-name', 'yes-framework');
 
 $emitter = new ResponseSender();
 $emitter->send($response);
